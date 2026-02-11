@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addPlayer } from "@/lib/store";
+import { addPlayer, joinFormSchema, JoinFormValues } from "@/lib/store";
 import { PlayerStatus } from "@/lib/types";
 import { Gamepad2, UserPlus } from "lucide-react";
 
@@ -10,14 +10,26 @@ const Join = () => {
   const [robloxUsername, setRobloxUsername] = useState("");
   const [status, setStatus] = useState<PlayerStatus>("online");
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof JoinFormValues, string>>>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!displayName.trim() || !robloxUsername.trim()) return;
 
+    const result = joinFormSchema.safeParse({ displayName, robloxUsername });
+    if (!result.success) {
+      const fieldErrors: typeof errors = {};
+      for (const issue of result.error.issues) {
+        const field = issue.path[0] as keyof JoinFormValues;
+        if (!fieldErrors[field]) fieldErrors[field] = issue.message;
+      }
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setErrors({});
     addPlayer({
-      displayName: displayName.trim(),
-      robloxUsername: robloxUsername.trim(),
+      displayName: result.data.displayName,
+      robloxUsername: result.data.robloxUsername,
       status,
     });
 
@@ -71,9 +83,13 @@ const Join = () => {
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               placeholder="e.g. xBlaze"
+              maxLength={50}
               required
               className="w-full rounded-lg border border-border bg-secondary px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
             />
+            {errors.displayName && (
+              <p className="mt-1 text-xs text-destructive">{errors.displayName}</p>
+            )}
           </div>
 
           <div>
@@ -85,9 +101,13 @@ const Join = () => {
               value={robloxUsername}
               onChange={(e) => setRobloxUsername(e.target.value)}
               placeholder="e.g. BlazeMaster2025"
+              maxLength={20}
               required
               className="w-full rounded-lg border border-border bg-secondary px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
             />
+            {errors.robloxUsername && (
+              <p className="mt-1 text-xs text-destructive">{errors.robloxUsername}</p>
+            )}
           </div>
 
           <div>

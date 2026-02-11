@@ -1,6 +1,24 @@
-import { Player } from "./types";
+import { z } from "zod";
+import { Player, PlayerStatus } from "./types";
 
 const STORAGE_KEY = "cubox-players";
+
+const playerSchema = z.object({
+  id: z.string(),
+  displayName: z.string().min(1).max(50),
+  robloxUsername: z.string().min(1).max(20),
+  avatar: z.string().optional(),
+  status: z.enum(["online", "in-game", "offline"]),
+});
+
+const playersArraySchema = z.array(playerSchema);
+
+export const joinFormSchema = z.object({
+  displayName: z.string().trim().min(1, "Display name is required").max(50, "Max 50 characters").regex(/^[a-zA-Z0-9_\s]+$/, "Only letters, numbers, underscores, and spaces"),
+  robloxUsername: z.string().trim().min(3, "Min 3 characters").max(20, "Max 20 characters").regex(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, and underscores"),
+});
+
+export type JoinFormValues = z.infer<typeof joinFormSchema>;
 
 const DEFAULT_PLAYERS: Player[] = [
   {
@@ -42,12 +60,19 @@ const DEFAULT_PLAYERS: Player[] = [
 ];
 
 export function getPlayers(): Player[] {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (!stored) {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_PLAYERS));
+      return DEFAULT_PLAYERS;
+    }
+    const parsed = JSON.parse(stored);
+    const validated = playersArraySchema.parse(parsed);
+    return validated as Player[];
+  } catch {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_PLAYERS));
     return DEFAULT_PLAYERS;
   }
-  return JSON.parse(stored);
 }
 
 export function addPlayer(player: Omit<Player, "id">): Player {
