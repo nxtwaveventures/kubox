@@ -17,7 +17,8 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "🎉",
     points: 500,
     date: new Date(Date.now() + 99 * 24 * 60 * 60 * 1000).toISOString(),
-    link: "https://www.roblox.com/games/116897864195790/CUBOX-Party",
+    link: "https://www.roblox.com/games/79546208627805/99-Nights-in-the-Forest",
+    game: "99 Nights in the Forest",
   },
   {
     id: "2",
@@ -26,7 +27,8 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "⚔️",
     points: 1000,
     date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-    link: "https://www.roblox.com/games/116897864195790/CUBOX-PvP",
+    link: "https://www.roblox.com/games/79546208627805/99-Nights-in-the-Forest",
+    game: "99 Nights in the Forest",
   },
   {
     id: "3",
@@ -35,8 +37,8 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "💎",
     points: 300,
     date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
-    link: "https://www.roblox.com/games/116897864195790/CUBOX-Treasure",
-    game: "CUBOX Adventure",
+    link: "https://www.roblox.com/games/79546208627805/99-Nights-in-the-Forest",
+    game: "99 Nights in the Forest",
   },
   {
     id: "4",
@@ -45,7 +47,8 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "🏗️",
     points: 750,
     date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-    link: "https://www.roblox.com/games/116897864195790/CUBOX-Build",
+    link: "https://www.roblox.com/games/79546208627805/99-Nights-in-the-Forest",
+    game: "99 Nights in the Forest",
   },
   {
     id: "5",
@@ -54,7 +57,8 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "📋",
     points: 200,
     date: new Date(Date.now() + 99 * 24 * 60 * 60 * 1000).toISOString(),
-    link: "https://www.roblox.com/games/116897864195790/CUBOX-Quests",
+    link: "https://www.roblox.com/games/79546208627805/99-Nights-in-the-Forest",
+    game: "99 Nights in the Forest",
   },
 ];
 
