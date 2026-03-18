@@ -5,6 +5,8 @@ export interface GameEvent {
   emoji: string;
   points: number;
   date: string; // ISO date string
+  link?: string;
+  game?: string;
 }
 
 export const UPCOMING_EVENTS: GameEvent[] = [
@@ -15,6 +17,7 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "🎉",
     points: 500,
     date: new Date(Date.now() + 99 * 24 * 60 * 60 * 1000).toISOString(),
+    link: "https://www.roblox.com/games/116897864195790/CUBOX-Party",
   },
   {
     id: "2",
@@ -23,6 +26,7 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "⚔️",
     points: 1000,
     date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+    link: "https://www.roblox.com/games/116897864195790/CUBOX-PvP",
   },
   {
     id: "3",
@@ -31,6 +35,8 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "💎",
     points: 300,
     date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
+    link: "https://www.roblox.com/games/116897864195790/CUBOX-Treasure",
+    game: "CUBOX Adventure",
   },
   {
     id: "4",
@@ -39,6 +45,16 @@ export const UPCOMING_EVENTS: GameEvent[] = [
     emoji: "🏗️",
     points: 750,
     date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    link: "https://www.roblox.com/games/116897864195790/CUBOX-Build",
+  },
+  {
+    id: "5",
+    title: "Daily Quest",
+    description: "Complete daily challenges for bonus points!",
+    emoji: "📋",
+    points: 200,
+    date: new Date(Date.now() + 99 * 24 * 60 * 60 * 1000).toISOString(),
+    link: "https://www.roblox.com/games/116897864195790/CUBOX-Quests",
   },
 ];
 
