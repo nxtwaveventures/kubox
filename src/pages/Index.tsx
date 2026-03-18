@@ -93,18 +93,14 @@ const Index = () => {
             {sortedEvents.map((event) => {
               const countdown = getCountdown(event.date);
               return (
-                <a
+                <div
                   key={event.id}
-                  href={event.link || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-lg border border-border bg-secondary/50 p-3 transition-colors hover:border-primary/30 hover:bg-secondary/80 group"
+                  className="flex items-center gap-3 rounded-lg border border-border bg-secondary/50 p-3 transition-colors hover:border-primary/30"
                 >
                   <span className="text-2xl">{event.emoji}</span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-foreground flex items-center gap-1.5">
+                    <p className="truncate text-sm font-medium text-foreground">
                       {event.title}
-                      <ExternalLink className="h-3 w-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                     </p>
                     <p className="truncate text-xs text-muted-foreground">
                       {event.description}
@@ -120,7 +116,7 @@ const Index = () => {
                       {event.points} pts
                     </span>
                   </div>
-                </a>
+                </div>
               );
             })}
           </div>
